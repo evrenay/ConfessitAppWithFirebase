@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "112819051260",
+    "firebase_url": "https://confessit-9414d.firebaseio.com",
+    "project_id": "confessit-9414d",
+    "storage_bucket": "confessit-9414d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112819051260:android:ecad15fe8b5c4e93",
+        "android_client_info": {
+          "package_name": "confessit.evren.com.confessit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112819051260-n904f8f38doiq8fr0u95n4c3m1c26lvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "confessit.evren.com.confessit",
+            "certificate_hash": "26b352b4a11c827f9a2634383a5941cd5ef6ddba"
+          }
+        },
+        {
+          "client_id": "112819051260-77j10cn5e20mebadaqjgshb4rldboksm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChAWMN7cFeu51_goI0moxHC5k4bKesRpQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112819051260-77j10cn5e20mebadaqjgshb4rldboksm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

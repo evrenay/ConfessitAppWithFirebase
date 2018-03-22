@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="title_bottom_margin">16dp</dimen>
+    <dimen name="icon_top_margin">24dp</dimen>
+    <dimen name="icon_bottom_margin">24dp</dimen>
+    <dimen name="sign_button_padding_left">50dp</dimen>
+    <dimen name="sign_button_padding_right">50dp</dimen>
+    <dimen name="sign_button_layout_margin_top">40dp</dimen>
+</resources>
