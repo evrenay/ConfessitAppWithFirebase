@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Confessit</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Çıkış</string>
     <string name="loading">Lütfen Bekleyiniz...</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
@@ -13,4 +13,11 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="facebook_app_id">227498407820864</string>
     <string name="fb_login_protocol_scheme">fb227498407820864</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="confess_text">Confess\' le</string>
+    <string name="upload">UPLOAD</string>
+    <string name="post_nick">Nick</string>
+    <string name="post_comment">merhaba.Burası Benim Postum.</string>
+    <string name="postbutton_like">Like</string>
+    <string name="postbutton_comment">Yorumlar</string>
 </resources>

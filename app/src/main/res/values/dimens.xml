@@ -5,4 +5,8 @@
     <dimen name="sign_button_padding_left">50dp</dimen>
     <dimen name="sign_button_padding_right">50dp</dimen>
     <dimen name="sign_button_layout_margin_top">40dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="write_confes_size">30sp</dimen>
+    <dimen name="confess_header">15dp</dimen>
+    <dimen name="choose_image">50dp</dimen>
 </resources>

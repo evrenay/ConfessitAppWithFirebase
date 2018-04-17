@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/confess_background"
+    android:layout_gravity="center_horizontal"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/confess_header"
+    >
+    <ImageButton
+        android:id="@+id/left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/left_arrow"
+        android:layout_marginLeft="@dimen/confess_header"
+        android:background="@color/confess_background"/>
+    <ImageButton
+        android:id="@+id/go_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gallery"
+        android:background="@color/confess_background"
+        android:layout_marginRight="@dimen/confess_header"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        />
+
+
+</RelativeLayout>
+
+<ImageView
+    android:id="@+id/confess_logo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/logo"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="3">
+            <EditText
+                android:id="@+id/edtconfess_write"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="top|left"
+                android:hint="itiraflar buraya yazılacaktır..."
+                android:textColor="@color/confess_text_color"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@drawable/confess_write_custom"
+                android:scrollbars="vertical"
+                 />
+
+
+            <Button
+                android:id="@+id/btn_uploadfirebase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/fab_margin"
+                android:background="@drawable/confess_button_custom"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/confess_text"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

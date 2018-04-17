@@ -54,8 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         loginButton = findViewById(R.id.facebook_login_button);
         sign = findViewById(R.id.gmail_login_button);
@@ -144,7 +143,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(getApplicationContext(),ConfessActivity.class);
+                            intent.putExtra("LoginTag",2);
                             startActivity(intent);
+                            MainActivity.this.finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -199,7 +200,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             Intent intent = new Intent(getApplicationContext(),ConfessActivity.class);
+                            intent.putExtra("LoginTag",1);
                             startActivity(intent);
+                            MainActivity.this.finish();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -229,28 +232,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     }
-            
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onClick(View v) {
