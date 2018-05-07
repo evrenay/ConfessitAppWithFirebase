@@ -142,8 +142,15 @@ public class ConfessActivity extends BaseActivity  {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
 
                     HashMap<String, String> hashMap = (HashMap<String, String>) ds.getValue();
-                    userPostsFromFB.add(new Posts(hashMap.get("comment"),hashMap.get("downloadurl"),hashMap.get("useremail")));
-                    adapter_items.notifyDataSetChanged();
+                    if(hashMap.get("downloadurl")==null){
+                        userPostsFromFB.add(new Posts.Builder(Posts.TYPE_MESSAGE_COMMENT).userComment(hashMap.get("comment")).userEmail(hashMap.get("useremail")).build());
+                        adapter_items.notifyDataSetChanged();
+                    }
+                    else {
+                        userPostsFromFB.add(new Posts.Builder(Posts.TYPE_MESSAGE_PHOTO).userComment(hashMap.get("comment")).userEmail(hashMap.get("useremail")).imageUrl(hashMap.get("downloadurl")).build());
+                        adapter_items.notifyDataSetChanged();
+                    }
+
 
                 }
 

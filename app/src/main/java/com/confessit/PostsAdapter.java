@@ -2,6 +2,7 @@ package com.confessit;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import confessit.evren.com.confessit.R;
@@ -39,18 +41,31 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
     }
 
-    List<Posts> postsList;
+    ArrayList<Posts> postsList;
     CustomItemClickListener listener;
-    public PostsAdapter(List<Posts> postsList, CustomItemClickListener listener) {
+    public PostsAdapter(ArrayList<Posts> postsList, CustomItemClickListener listener) {
 
         this.postsList = postsList;
         this.listener = listener;
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        Posts posts = postsList.get(position);
+        return posts.getType();
+    }
     @Override
     public PostsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layout = -1;
+        switch (viewType) {
+            case Posts.TYPE_MESSAGE_COMMENT:
+                layout = R.layout.custom_post_comment;
+                break;
+            case Posts.TYPE_MESSAGE_PHOTO:
+                layout = R.layout.custom_post;
+                break;
+        }
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_post, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         final ViewHolder view_holder = new ViewHolder(v);
 
         v.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +81,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.userComment.setText(postsList.get(position).getUserComment());
-        holder.userEmail.setText(postsList.get(position).getUserEmail());
-        Picasso.get().load(postsList.get(position).getImageUrl()).into(holder.postImage);
+        Posts posts = postsList.get(position);
+        if(posts.getType()==1){
+            holder.userComment.setText(posts.getUserComment());
+            holder.userEmail.setText(posts.getUserEmail());
+            Picasso.get().load(posts.getImageUrl()).into(holder.postImage);
+        }//photo
+        else if(posts.getType()==2){
+            holder.userComment.setText(posts.getUserComment());
+            holder.userEmail.setText(posts.getUserEmail());
+        } //only comment
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -76,37 +77,60 @@ public class ConfessWriteActivity extends AppCompatActivity {
         uploadFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                filename = "images/"+filename;
-                //Log.d("uuuid",selected.toString());
-                StorageReference storageReference = mStorageRef.child(filename);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                btm.compress(Bitmap.CompressFormat.PNG, 100, baos); // sıkıştırma
-                byte[] data = baos.toByteArray();
-                UploadTask uploadTask = storageReference.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        String dowlandURL = taskSnapshot.getDownloadUrl().toString();
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        String userEmail = user.getEmail();
-                        String userComment = editText.getText().toString();
-                        UUID uuid = UUID.randomUUID();
-                        String uuidString = uuid.toString();
-                        myRef.child("Posts").child(uuidString).child("useremail").setValue(userEmail);
-                        myRef.child("Posts").child(uuidString).child("comment").setValue(userComment);
-                        myRef.child("Posts").child(uuidString).child("downloadurl").setValue(dowlandURL);
+                if(filename==null){
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String userEmail = user.getEmail();
+                    String userComment = editText.getText().toString();
+                    UUID uuid = UUID.randomUUID();
+                    String uuidString = uuid.toString();
+                    uuidString ="-"+uuidString;
+                    myRef.child("Posts").child(uuidString).child("useremail").setValue(userEmail);
+                    myRef.child("Posts").child(uuidString).child("comment").setValue(userComment);
+                    myRef.child("Posts").child(uuidString).child("downloadurl").setValue(null);
 
-                        Toast.makeText(ConfessWriteActivity.this,"Post Gönderme Başarılı",Toast.LENGTH_SHORT);
+                    Toast.makeText(ConfessWriteActivity.this,"Post Gönderme Başarılı",Toast.LENGTH_SHORT);
 
-                        Intent i = new Intent(ConfessWriteActivity.this, ConfessActivity.class);
-                        startActivity(i);
-                    }
-                });
+                    Intent i = new Intent(ConfessWriteActivity.this, ConfessActivity.class);
+                    startActivity(i);
+
+                }
+                else {
+                    filename = "images/"+filename;
+                    //Log.d("uuuid",selected.toString());
+                    StorageReference storageReference = mStorageRef.child(filename);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    btm.compress(Bitmap.CompressFormat.JPEG, 100, baos); // sıkıştırma
+                    byte[] data = baos.toByteArray();
+                    UploadTask uploadTask = storageReference.putBytes(data);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            String dowlandURL = taskSnapshot.getDownloadUrl().toString();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String userEmail = user.getEmail();
+                            String userComment = editText.getText().toString();
+                            UUID uuid = UUID.randomUUID();
+                            String uuidString = uuid.toString();
+                            uuidString ="-"+uuidString;
+                            myRef.child("Posts").child(uuidString).child("useremail").setValue(userEmail);
+                            myRef.child("Posts").child(uuidString).child("comment").setValue(userComment);
+                            myRef.child("Posts").child(uuidString).child("downloadurl").setValue(dowlandURL);
+
+                            Toast.makeText(ConfessWriteActivity.this,"Post Gönderme Başarılı",Toast.LENGTH_SHORT);
+
+                            Intent i = new Intent(ConfessWriteActivity.this, ConfessActivity.class);
+                            startActivity(i);
+                        }
+                    });
+
+                }
+
+
 
 
 
@@ -174,6 +198,10 @@ public class ConfessWriteActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+        }
+        else {
+            filename=null;
+            Toast.makeText(ConfessWriteActivity.this,"Resim Seçme İşlemi Başarısız..!",Toast.LENGTH_LONG).show();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
