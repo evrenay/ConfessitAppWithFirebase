@@ -46,7 +46,7 @@ import confessit.evren.com.confessit.R;
  * Created by EVREN on 12.4.2018.
  */
 
-public class ConfessWriteActivity extends AppCompatActivity {
+public class ConfessWriteActivity extends BaseActivity {
     private EditText editText;
     private ImageView imageView;
     private Button uploadFirebase;
@@ -59,7 +59,7 @@ public class ConfessWriteActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private Bitmap btm;
-
+    private static final String TAG = "ConfessWriteActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +78,7 @@ public class ConfessWriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(filename==null){
+                    showProgressDialog();
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userEmail = user.getEmail();
                     String userComment = editText.getText().toString();
@@ -89,12 +90,13 @@ public class ConfessWriteActivity extends AppCompatActivity {
                     myRef.child("Posts").child(uuidString).child("downloadurl").setValue(null);
 
                     Toast.makeText(ConfessWriteActivity.this,"Post Gönderme Başarılı",Toast.LENGTH_SHORT);
-
+                    hideProgressDialog();
                     Intent i = new Intent(ConfessWriteActivity.this, ConfessActivity.class);
                     startActivity(i);
 
                 }
                 else {
+                    showProgressDialog();
                     filename = "images/"+filename;
                     //Log.d("uuuid",selected.toString());
                     StorageReference storageReference = mStorageRef.child(filename);
@@ -122,7 +124,7 @@ public class ConfessWriteActivity extends AppCompatActivity {
                             myRef.child("Posts").child(uuidString).child("downloadurl").setValue(dowlandURL);
 
                             Toast.makeText(ConfessWriteActivity.this,"Post Gönderme Başarılı",Toast.LENGTH_SHORT);
-
+                            hideProgressDialog();
                             Intent i = new Intent(ConfessWriteActivity.this, ConfessActivity.class);
                             startActivity(i);
                         }

@@ -37,7 +37,7 @@ import confessit.evren.com.confessit.R;
  * Created by EVREN on 13.4.2018.
  */
 
-public class ChooseImageActivity extends AppCompatActivity {
+public class ChooseImageActivity extends BaseActivity {
     private static final int REQUESTCODE_GALLERY=1;
     private static final int REQUESTCODE_PERMISSION=2;
     private ImageButton backFragment;
